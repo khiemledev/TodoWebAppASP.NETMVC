@@ -1,0 +1,36 @@
+﻿@model IQueryable<TodoWebApp.Models.Todo>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 class="page-header">All Your Todo</h1>
+
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Done</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var todo in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@todo.Name, "Detail", new { id = todo.Id })</td>
+                <td>
+                    @if (todo.IsDone)
+                    {
+                        <p>Done</p>
+                    }
+                </td>
+                <td>@Html.ActionLink("Edit", "Edit", new { @id = todo.Id })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { @id = todo.Id })</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿@model TodoWebApp.Models.Todo
+@{
+    ViewBag.Title = "Edit todo";
+}
+
+<h2 class="page-header">Add Todo</h2>
+
+@using (Html.BeginForm("Edit", "Home", null, FormMethod.Post, new { @class = "form-group" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(t => t.Name)
+    @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(t => t.Name)
+    <br />
+
+    @Html.LabelFor(t => t.Content)
+    @Html.TextAreaFor(t => t.Content, new { @class = "form-control" })
+    @Html.ValidationMessageFor(t => t.Content)
+    <br />
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(t => t.IsDone)
+            @Html.LabelFor(t => t.IsDone)
+        </label>
+    </div>
+
+    @Html.HiddenFor(t => t.UserId, new { @Value = "default_user_id" })
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+}
